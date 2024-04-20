@@ -1,0 +1,38 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2 class="mb-3">Login</h2>
+        <form (ngSubmit)="login()">
+          <div class="mb-3">
+            <label for="loginEmail" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="loginEmail" [(ngModel)]="loginEmail" name="loginEmail" required>
+          </div>
+          <div class="mb-3">
+            <label for="loginPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="loginPassword" [(ngModel)]="loginPassword" name="loginPassword" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+  
+      <div class="col-md-6">
+        <h2 class="mb-3">Register</h2>
+        <form (ngSubmit)="register()">
+          <div class="mb-3">
+            <label for="registerName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="registerName" [(ngModel)]="registerName" name="registerName" required>
+          </div>
+          <div class="mb-3">
+            <label for="registerEmail" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="registerEmail" [(ngModel)]="registerEmail" name="registerEmail" required>
+          </div>
+          <div class="mb-3">
+            <label for="registerPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="registerPassword" [(ngModel)]="registerPassword" name="registerPassword" required>
+          </div>
+          <button type="submit" class="btn btn-success">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
