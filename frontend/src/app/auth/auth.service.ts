@@ -1,72 +1,74 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { authConfig } from './auth-config'; // Ensure this path is correct
-import { HttpClient } from '@angular/common/http'; // Import HttpClient
+import { authConfig } from './auth-config';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment'; // Ensure the path is correct
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // Single constructor with both dependencies
+  private isBrowser: boolean; // Flag to check if running in the browser
+
   constructor(
     private oauthService: OAuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) platformId: Object
   ) {
-    // Configure OAuthService
+    this.isBrowser = isPlatformBrowser(platformId);
+    if (this.isBrowser) {
+      this.initializeOAuth(); // Initialize OAuth only if in browser environment
+    }
+  }
+
+  private initializeOAuth(): void {
     this.oauthService.configure(authConfig);
-    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(_ => {
+    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
       if (this.oauthService.hasValidAccessToken()) {
-        // Handle successful login here
+        console.log('Successfully logged in with OAuth!');
+        // Redirect or load user data as necessary
       }
     });
   }
 
-  // Custom login method to handle form-based login
   login(email: string, password: string) {
-    console.log('Login attempt with:', email, password);
-    // Implement login logic here, e.g., HTTP request to your Laravel API
-    return this.http.post('your-api-url/login', { email, password });
+    // Make HTTP POST for custom login
+    return this.http.post(`${environment.apiUrl}/login`, { email, password });
   }
 
-  // Custom registration method to handle form-based registration
   register(name: string, email: string, password: string) {
-    console.log('Registration attempt with:', name, email, password);
-    // Implement registration logic here
-    return this.http.post('your-api-url/register', { name, email, password });
+    // Make HTTP POST for custom registration
+    return this.http.post(`${environment.apiUrl}/register`, { name, email, password });
   }
 
-  // Start the OAuth login flow
-  public initiateLogin(): void {
-    this.oauthService.initLoginFlow();
+  initiateLogin(): void {
+    if (this.isBrowser) { // Ensure running in the browser
+      this.oauthService.initLoginFlow();
+    }
   }
 
-  // Log out from both custom session and OAuth
-  public logOut(): void {
-    this.oauthService.logOut();
-    // Handle other cleanup tasks if needed
+  logOut(): void {
+    if (this.isBrowser) { // Ensure running in the browser
+      this.oauthService.logOut();
+    }
   }
 
-  // Handle the authentication process after redirection
-  public handleAuthentication(): void {
-    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(_ => {
-      if (this.oauthService.hasValidAccessToken()) {
-        // You can now handle the user's session or redirect as necessary
-      }
-    });
+  handleAuthentication(): void {
+    if (this.isBrowser && !this.oauthService.hasValidAccessToken()) {
+      this.oauthService.initLoginFlow();
+    }
   }
 
-  // Accessor to retrieve the current access token
-  public get token() {
+  get token() {
     return this.oauthService.getAccessToken();
   }
 
-  // Check if the user is authenticated
-  public get isAuthenticated() {
+  get isAuthenticated() {
     return this.oauthService.hasValidAccessToken();
   }
 
-  // Get the identity claims from the token
-  public get claims() {
+  get claims() {
     return this.oauthService.getIdentityClaims();
   }
 }

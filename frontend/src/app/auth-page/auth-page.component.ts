@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../auth/auth.service'; // Adjust path as necessary
+import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router'; // Import Router
 
 @Component({
   selector: 'app-auth-page',
@@ -7,28 +8,43 @@ import { AuthService } from '../auth/auth.service'; // Adjust path as necessary
   styleUrls: ['./auth-page.component.css']
 })
 export class AuthPageComponent {
-  // Initialize with empty strings to ensure they are never undefined
   loginEmail: string = '';
   loginPassword: string = '';
   registerName: string = '';
   registerEmail: string = '';
   registerPassword: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {} // Inject Router
 
   login() {
-    // Now, these will always be strings, even if empty
-    if (this.loginEmail && this.loginPassword) {
-      this.authService.login(this.loginEmail, this.loginPassword);
+    if (this.loginEmail.trim() && this.loginPassword.trim()) {
+      this.authService.login(this.loginEmail, this.loginPassword)
+        .subscribe({
+          next: (response) => {
+            console.log('Login successful:', response);
+            this.router.navigate(['/dashboard']); // Redirect to dashboard or another route
+          },
+          error: (error) => {
+            console.error('Login failed:', error);
+          }
+        });
     } else {
       console.error('Login or password missing!');
     }
   }
 
   register() {
-    // Check all fields are filled before attempting to register
-    if (this.registerName && this.registerEmail && this.registerPassword) {
-      this.authService.register(this.registerName, this.registerEmail, this.registerPassword);
+    if (this.registerName.trim() && this.registerEmail.trim() && this.registerPassword.trim()) {
+      this.authService.register(this.registerName, this.registerEmail, this.registerPassword)
+        .subscribe({
+          next: (response) => {
+            console.log('Registration successful:', response);
+            this.router.navigate(['/login']); // Redirect to login page or another confirmation page
+          },
+          error: (error) => {
+            console.error('Registration failed:', error);
+          }
+        });
     } else {
       console.error('All registration fields must be filled!');
     }
