@@ -23,6 +23,7 @@ export class ApiService {
     } else {
       // Handle server-side logic or return mock data
       console.log('Server side request for /api/data');
+      return;
     }
   }
 
