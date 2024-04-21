@@ -24,12 +24,13 @@ export class AuthService {
 
   private initializeOAuth(): void {
     this.oauthService.configure(authConfig);
-    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+  this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
       if (this.oauthService.hasValidAccessToken()) {
+        
         console.log('Successfully logged in with OAuth!');
         // Redirect or load user data as necessary
       }
-    });
+   });
   }
 
   login(email: string, password: string) {
@@ -37,9 +38,9 @@ export class AuthService {
     return this.http.post(`${environment.apiUrl}/login`, { email, password });
   }
 
-  register(name: string, email: string, password: string) {
+  register(name: string, email: string, password: string, password_confirmation: string) {
     // Make HTTP POST for custom registration
-    return this.http.post(`${environment.apiUrl}/register`, { name, email, password });
+    return this.http.post(`${environment.apiUrl}/register`, { name, email, password, password_confirmation });
   }
 
   initiateLogin(): void {
@@ -64,9 +65,11 @@ export class AuthService {
     return this.oauthService.getAccessToken();
   }
 
-  get isAuthenticated() {
-    return this.oauthService.hasValidAccessToken();
+  get isAuthenticated(): boolean {
+    const token = localStorage.getItem('access_token');
+    return !!token; // Converts the presence of the token into a boolean
   }
+
 
   get claims() {
     return this.oauthService.getIdentityClaims();

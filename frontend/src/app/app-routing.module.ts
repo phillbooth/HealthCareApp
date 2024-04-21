@@ -8,8 +8,8 @@ import { AuthGuard } from './auth/auth.guard';  // Import the AuthGuard
 const routes: Routes = [
   { path: 'callback', component: AuthCallbackComponent },
   { path: 'auth-page', component: AuthPageComponent },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }, // Apply guard to home
-  { path: '', redirectTo: '/auth-page', pathMatch: 'full' } // Redirect to login if no other routes match
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/auth-page', pathMatch: 'full' }
 ];
 
 @NgModule({

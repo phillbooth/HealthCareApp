@@ -1,6 +1,7 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,10 @@ export class ApiService {
       // Handle server-side logic or return mock data
       console.log('Server side request for /api/data');
     }
+  }
+
+
+  getChartData(): Observable<any> {
+    return this.http.get('/api/appointment-stats');
   }
 }

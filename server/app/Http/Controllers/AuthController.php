@@ -51,11 +51,11 @@ class AuthController extends Controller
         \Log::info('Register attempt:', $request->all());
 
         
-            $validatedData = $request->validate([
-                'name' => 'required|max:255',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|confirmed|min:6',
-            ]);
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',  // Example: Minimum length can be 8.
+        ]);
         
             try {
                 $user = User::create([

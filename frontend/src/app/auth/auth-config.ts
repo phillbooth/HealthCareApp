@@ -8,5 +8,6 @@ export const authConfig: AuthConfig = {
   scope: 'openid profile email',
   requireHttps: false, // Note: Only for development; production should use HTTPS
   showDebugInformation: true,
-  oidc: false
+  oidc: false,
+  
 };

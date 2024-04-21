@@ -12,6 +12,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 */
 
+
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 
@@ -21,3 +22,5 @@ Route::middleware('auth:api')->group(function () {
     });
     Route::get('/appointment-stats', [AppointmentStatsController::class, 'index']);
 });
+
+

@@ -10,15 +10,19 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authService.isAuthenticated) {  // Access without calling it as a function
-      return true;
-    } else {
-      this.router.navigate(['/auth-page']);  // Navigate to login page if not authenticated
-      return false;
-    }
-  }
+  canActivate(): boolean {
+    console.log("Access Token:", this.authService.token);  // Log the current token
+    console.log("Is Authenticated:", this.authService.isAuthenticated);  // Check the authentication status
   
+   
+      if (this.authService.isAuthenticated) {
+        return true;
+      } else {
+        console.log("Not authenticated, redirecting to login.");
+        this.router.navigate(['/auth-page']);
+        return false;
+      }
+   
+  
+    }
 }
