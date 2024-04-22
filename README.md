@@ -1,11 +1,10 @@
 # Example Healthcare Stats App
 
-- Example app that shows a Donut chart and a Scatter graph using Angular 17 and the data taken from Laravel 11
+- Example app that shows a Donut chart and a Scatter graph using Angular 17 and the data taken from Laravel 11.
 
-- Whats not including int he app is its still missing a lot of things like testing and error reporting for example it is not intended as a finished product
+- What's not included in the app is it's still missing a lot of things like testing and error reporting for example; it is not intended as a finished product.
 
-
-- **OAuth 2.0**: Has been used rather than sancrtum cookey for a login for enhanced security
+- **OAuth 2.0**: Has been used rather than Sanctum cookie for login for enhanced security.
 
 
 ![alt text](/healthapp-screengrab-1.png)
@@ -18,7 +17,7 @@
 ### Setting Up the Laravel Backend
 
 
-- With Laravel running you alos need to run Angular for the frontend
+- With Laravel running you also need to run Angular for the frontend.
 
 - Navigate to the server directory: cd ./server
 - Install Composer dependencies: composer install
@@ -42,7 +41,7 @@
 - Ensure you have all necessary environments set up, such as Node.js for npm commands and PHP for Composer and Artisan commands.
 - Adjust paths and commands according to your project structure if it differs from the standard setup outlined here.
 ----------------------------------------------
-## notes
+## Notes
 
 ## Laravel (Backend)
 
@@ -51,7 +50,7 @@
 - **Database**: Use relational databases like MySQL or PostgreSQL with Laravel's Eloquent ORM for secure and efficient data handling.
 
 ### Security and Compliance
-- **OAuth 2.0**: Secure APIs using OAuth 2.0 authentication protocol.
+- **OAuth 2.0**: Secure APIs using the OAuth 2.0 authentication protocol.
 - **HIPAA and GDPR Compliance**: Ensure data handling complies with HIPAA and GDPR, including data encryption, regular security audits, and access control.
 
 ### Performance and Scalability
@@ -85,7 +84,8 @@
 
 
 
-
+=====================
+## NOTES ONLY the Angular app provides a register and login form
 
 ## Register
 
@@ -98,7 +98,6 @@ Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/register" -Method Post -Conten
 
 =====================
 
-## login
+## Login
 
 Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/login" -Method Post -ContentType "application/json" -Body '{"email": "user10@example.com", "password": "password123"}'
-
