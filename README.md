@@ -8,9 +8,37 @@
 
 ![alt text](/healthapp-screengrab-1.png)
 
+----------------------------------------------
+
+
+## Installation
+
+### Setting Up the Laravel Backend
+
+
+- With Laravel running you alos need to run Angular for the frontend
+
+- Navigate to the server directory: cd ./server
+- Install Composer dependencies: composer install
+- Install NPM packages: npm i
+- Run database migrations: php artisan migrate
+- Seed the database: php artisan db:seed
+- Start the Laravel server: php artisan serve
+
+
+### Setting Up the Angular Frontend
+- Navigate to the frontend directory:  cd ./frontend
+- Install NPM packages: npm install
+- Serve the Angular application: ng serve
 
 
 
+
+### Notes:
+
+- Make sure each command is executed in the correct directory.
+- Ensure you have all necessary environments set up, such as Node.js for npm commands and PHP for Composer and Artisan commands.
+- Adjust paths and commands according to your project structure if it differs from the standard setup outlined here.
 ----------------------------------------------
 ## notes
 
