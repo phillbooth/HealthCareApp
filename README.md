@@ -11,7 +11,9 @@
 
 ----------------------------------------------
 
+![alt text](/healthapp-screengrab-2.png)
 
+----------------------------------------------
 ## Installation
 
 ### Setting Up the Laravel Backend
