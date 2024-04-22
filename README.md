@@ -1,25 +1,18 @@
+# Example Healthcare Stats App
 
-## Register
+- Example app that shows a Donut chart and a Scatter graph using Angular 17 and the data taken from Laravel 11
 
-Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/register" -Method Post -ContentType "application/json" -Body '{
-    "name": "John Doe",
-    "email": "user@example.com",
-    "password": "password123",
-    "password_confirmation": "password123"
-}'
 
-=====================
+- **OAuth 2.0**: Has been used rather than sancrtum cookey for a login for enhanced security
 
-## login
 
-Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/login" -Method Post -ContentType "application/json" -Body '{"email": "user10@example.com", "password": "password123"}'
+![alt text](/healthapp-screengrab-1.png)
 
 
 
 
-
-
-
+----------------------------------------------
+## notes
 
 ## Laravel (Backend)
 
@@ -59,3 +52,23 @@ Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/login" -Method Post -ContentTy
 ### Security and Data Protection
 - **Client-Side Security**: Ensure secure data transmission and handle sensitive data carefully on the client side.
 - **Authentication Integration**: Coordinate with backend OAuth 2.0 services for secure user authentication and session management.
+
+
+
+
+
+## Register
+
+Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/register" -Method Post -ContentType "application/json" -Body '{
+    "name": "John Doe",
+    "email": "user@example.com",
+    "password": "password123",
+    "password_confirmation": "password123"
+}'
+
+=====================
+
+## login
+
+Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/login" -Method Post -ContentType "application/json" -Body '{"email": "user10@example.com", "password": "password123"}'
+
