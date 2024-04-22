@@ -2,6 +2,8 @@
 
 - Example app that shows a Donut chart and a Scatter graph using Angular 17 and the data taken from Laravel 11
 
+- Whats not including int he app is its still missing a lot of things like testing and error reporting for example it is not intended as a finished product
+
 
 - **OAuth 2.0**: Has been used rather than sancrtum cookey for a login for enhanced security
 
