@@ -1,1 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+.max-width-chart canvas {
+  max-width: 500px; /* Sets maximum width for the canvas to ensure it doesn't grow too large */
+  margin: auto; /* Centers the canvas within its container */
+}

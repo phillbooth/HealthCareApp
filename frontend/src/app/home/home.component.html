@@ -1,5 +1,48 @@
-<!-- home.component.html -->
-<div>
-    <canvas #canvas></canvas>
+<!-- Home component template with multiple charts and text columns -->
+<div class="container mt-4">
+  <!-- First row for the donut chart and text -->
+  <div class="row">
+    <!-- Column for the donut chart -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Appointment Type Percentages</h5>
+          <canvas #chartCanvas1></canvas> <!-- Reference for the donut chart -->
+        </div>
+      </div>
+    </div>
+    <!-- Column for text description or additional info -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Details About the Data</h5>
+          <p class="card-text">
+            This chart illustrates the percentage distribution of different types of appointments. Each segment shows how much each appointment type contributes to the overall usage.
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
-  
+  <!-- Second row for another chart and text, structure similar to the first row -->
+  <div class="row">
+    <!-- Future column for another chart -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <canvas #chartCanvas2></canvas> <!-- Placeholder for another chart -->
+        </div>
+      </div>
+    </div>
+    <!-- Future column for more text or details -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">More Insights</h5>
+          <p class="card-text">
+            Additional details or analysis can be placed here to accompany the second chart, providing context or deeper insights into the data represented.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

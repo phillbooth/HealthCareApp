@@ -20,7 +20,9 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    Route::get('/appointment-stats', [AppointmentStatsController::class, 'index']);
+    
 });
 
 
+Route::get('/appointment-type-percentages', [AppointmentStatsController::class, 'getAppointmentTypesPercentages']);
+Route::get('/average-appointment-lengths', [AppointmentStatsController::class, 'getAverageAppointmentLengths']);

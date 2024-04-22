@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
-use Illuminate\Support\Facades\Cache;  // Make sure to include the Cache facade
+use Illuminate\Support\Facades\Cache;
 
 class AppointmentStatsController extends Controller
 {
-    public function index()
+    public function getAppointmentTypesPercentages()
     {
-        // Use Laravel's Cache facade to cache the results
-        $percentages = Cache::remember('appointment_stats', 60, function () {
+        $percentages = Cache::remember('appointment_types_percentages', 60, function () {
             $stats = Appointment::query()
                 ->selectRaw('appointment_type, COUNT(*) as count')
                 ->groupBy('appointment_type')
@@ -28,4 +27,25 @@ class AppointmentStatsController extends Controller
 
         return response()->json($percentages);
     }
+
+    public function getAverageAppointmentLengths()
+    {
+        try {
+            $averageLengths = Cache::remember('average_appointment_lengths', 60, function () {
+                return Appointment::query()
+                    ->selectRaw('doctor, AVG(appointment_length) as average_appointment_lengths')
+                    ->groupBy('doctor')
+                    ->get()
+                    ->mapWithKeys(function ($item) {
+                        return [$item->doctor => round($item->average_appointment_lengths, 2)];
+                    });
+            });
+    
+            return response()->json($averageLengths);
+        } catch (\Exception $e) {
+            // Log the error or handle it as per your needs
+            return response()->json(['error' => 'Failed to fetch average appointment lengths'], 500);
+        }
+    }
+    
 }

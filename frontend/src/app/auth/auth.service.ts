@@ -14,7 +14,7 @@ export class AuthService {
   constructor(
     private oauthService: OAuthService,
     private http: HttpClient,
-    @Inject(PLATFORM_ID) platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
     if (this.isBrowser) {
@@ -66,10 +66,13 @@ export class AuthService {
   }
 
   get isAuthenticated(): boolean {
-    const token = localStorage.getItem('access_token');
-    return !!token; // Converts the presence of the token into a boolean
+    if (isPlatformBrowser(this.platformId)) {
+      // Only try to access localStorage when code runs in the browser
+      const token = localStorage.getItem('access_token');
+      return !!token;
+    }
+    return false;
   }
-
 
   get claims() {
     return this.oauthService.getIdentityClaims();
